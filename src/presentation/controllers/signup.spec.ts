@@ -31,7 +31,7 @@ describe('SignUp Controller', () => {
       body: {
         email: 'any_email@email.com',
         password: 'any_password',
-        password_confirmation: 'any_password_confirmation'
+        passwordConfirmation: 'any_passwordConfirmation'
       }
     }
     const htppResponse = sut.handle(httpRequest)
@@ -45,7 +45,7 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         password: 'any_password',
-        password_confirmation: 'any_password_confirmation'
+        passwordConfirmation: 'any_passwordConfirmation'
       }
     }
     const htppResponse = sut.handle(httpRequest)
@@ -59,7 +59,7 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@email.com',
-        password_confirmation: 'any_password_confirmation'
+        passwordConfirmation: 'any_passwordConfirmation'
       }
     }
     const htppResponse = sut.handle(httpRequest)
@@ -67,7 +67,7 @@ describe('SignUp Controller', () => {
     expect(htppResponse.body).toEqual(new MissingParamError('password'))
   })
 
-  test('Shoulds return 400 if no password_confirmation is provided', () => {
+  test('Shoulds return 400 if no passwordConfirmation is provided', () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
@@ -78,7 +78,7 @@ describe('SignUp Controller', () => {
     }
     const htppResponse = sut.handle(httpRequest)
     expect(htppResponse.statusCode).toBe(400)
-    expect(htppResponse.body).toEqual(new MissingParamError('password_confirmation'))
+    expect(htppResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
   })
 
   test('Shoulds return 400 if an invalidemail is provided', () => {
@@ -89,7 +89,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'invalid_email@email.com',
         password: 'any_password',
-        password_confirmation: 'any_password_confirmation'
+        passwordConfirmation: 'any_passwordConfirmation'
       }
     }
     const htppResponse = sut.handle(httpRequest)
@@ -105,7 +105,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'any_email@email.com',
         password: 'any_password',
-        password_confirmation: 'any_password_confirmation'
+        passwordConfirmation: 'any_passwordConfirmation'
       }
     }
     sut.handle(httpRequest)
@@ -122,7 +122,7 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'invalid_email@email.com',
         password: 'any_password',
-        password_confirmation: 'any_password_confirmation'
+        passwordConfirmation: 'any_passwordConfirmation'
       }
     }
     const htppResponse = sut.handle(httpRequest)
@@ -137,11 +137,11 @@ describe('SignUp Controller', () => {
         name: 'any_name',
         email: 'any_email@email.com',
         password: 'any_password',
-        password_confirmation: 'invalid_password'
+        passwordConfirmation: 'invalid_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new InvalidParamError('password_confirmation'))
+    expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
   })
 })
