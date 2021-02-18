@@ -16,7 +16,10 @@ export class LoginControlller implements Controller {
         return badRequest(error)
       }
       const { email, password } = htppRequest.body
-      const accessToken = await this.authentication.auth(email, password)
+      const accessToken = await this.authentication.auth({
+        email,
+        password
+      })
       if (!accessToken) {
         return unauthorized()
       }
