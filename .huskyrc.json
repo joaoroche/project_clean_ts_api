@@ -1,6 +1,6 @@
 {
     "hooks": {
-        "pre-commit": "lint-staged",
+        "pre-commit": "set NODE_OPTIONS=--max_old_space_size=4096 && lint-staged",
         "pre-push": "npm run test:ci"
     }
 }
