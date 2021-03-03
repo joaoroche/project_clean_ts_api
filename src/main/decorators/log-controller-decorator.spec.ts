@@ -7,7 +7,7 @@ import { AccountModel } from '../../domain/models/account'
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return new Promise(resolve => resolve(ok(makeFakeAccount())))
+      return await new Promise(resolve => resolve(ok(makeFakeAccount())))
     }
   }
   return new ControllerStub()
@@ -16,7 +16,7 @@ const makeController = (): Controller => {
 const makeLogErrorRepository = (): LogErrorRepository => {
   class LogErrorRepositoryStub implements LogErrorRepository {
     async logError (stack: string): Promise<void> {
-      return new Promise(resolve => resolve())
+      return await new Promise(resolve => resolve())
     }
   }
   return new LogErrorRepositoryStub()
@@ -62,7 +62,7 @@ const makeSut = (): SutTypes => {
 }
 describe('LogController test', () => {
   test('sould call controller handle', async () => {
-    const { sut,controllerStub } = makeSut()
+    const { sut, controllerStub } = makeSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
     await sut.handle(makeFakeRequest())
     expect(handleSpy).toHaveBeenCalledWith(makeFakeRequest())
