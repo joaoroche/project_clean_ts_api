@@ -4,11 +4,11 @@ export interface AddSurveyModel {
 }
 
 export interface SurveyAnswer {
-  image: string
+  image?: string
   answer: string
 }
 
 export interface AddSurvey {
   // eslint-disable-next-line @typescript-eslint/method-signature-style
-  add (data: AddSurveyModel): Promise<void>
+  add (surveyData: AddSurveyModel): Promise<void>
 }
