@@ -9,5 +9,6 @@ export interface SurveyAnswer {
 }
 
 export interface AddSurvey {
-  add: (data: AddSurveyModel) => Promise<void>
+  // eslint-disable-next-line @typescript-eslint/method-signature-style
+  add (data: AddSurveyModel): Promise<void>
 }
