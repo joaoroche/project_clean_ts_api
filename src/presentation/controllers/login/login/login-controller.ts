@@ -5,13 +5,13 @@ export class LoginController implements Controller {
     private readonly authentication: Authentication,
     private readonly validation: Validation) {}
 
-  async handle (htppRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(htppRequest.body)
+      const error = this.validation.validate(httpRequest.body)
       if (error) {
         return badRequest(error)
       }
-      const { email, password } = htppRequest.body
+      const { email, password } = httpRequest.body
       const accessToken = await this.authentication.auth({
         email,
         password
