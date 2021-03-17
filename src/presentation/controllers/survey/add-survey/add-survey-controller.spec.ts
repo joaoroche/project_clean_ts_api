@@ -57,7 +57,6 @@ describe('AddSurvey Controller', () => {
   afterAll(() => {
     MockDate.reset()
   })
-
   test('Should call Validation with correct values', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
