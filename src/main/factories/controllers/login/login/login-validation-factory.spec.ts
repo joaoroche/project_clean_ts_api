@@ -1,4 +1,4 @@
-import { ValidationComposite, RequeridFieldValidation, EmailValidation } from '../../../../../validation/validators'
+import { ValidationComposite, RequiredFieldValidation, EmailValidation } from '../../../../../validation/validators'
 import { Validation } from '../../../../../presentation/protocols/validation'
 import { EmailValidator } from '../../../../../validation/protocols/email-validator'
 import { makeLoginValidation } from './login-validation-factory'
@@ -19,7 +19,7 @@ describe('LoginValidation Factory', () => {
     makeLoginValidation()
     const validations: Validation[] = []
     for (const field of ['email', 'password']) {
-      validations.push(new RequeridFieldValidation(field))
+      validations.push(new RequiredFieldValidation(field))
     }
     validations.push(new EmailValidation('email', makeEmailValidator()))
     expect(ValidationComposite).toHaveBeenCalledWith(validations)

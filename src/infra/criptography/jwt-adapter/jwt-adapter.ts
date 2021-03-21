@@ -3,11 +3,7 @@ import { Encrypter } from '../../../data/protocols/criptograth/encrypter'
 import { Decrypter } from '../../../data/protocols/criptograth/decrypter'
 
 export class JwtAdapter implements Encrypter, Decrypter {
-  private readonly secret: string
-
-  constructor (secret: string) {
-    this.secret = secret
-  }
+  constructor (private readonly secret: string) {}
 
   async encrypt (value: string): Promise<string> {
     const accessToken = await jwt.sign({ id: value }, this.secret)

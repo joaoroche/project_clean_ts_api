@@ -1,8 +1,8 @@
 import { MissingParamError } from '../../presentation/errors'
-import { RequeridFieldValidation } from './requerid-field-validation'
+import { RequiredFieldValidation } from './requerid-field-validation'
 
-const makeSut = (): RequeridFieldValidation => {
-  return new RequeridFieldValidation('field')
+const makeSut = (): RequiredFieldValidation => {
+  return new RequiredFieldValidation('field')
 }
 
 describe('RequeridField Validation', () => {

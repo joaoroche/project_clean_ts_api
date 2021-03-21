@@ -1,4 +1,4 @@
-import { EmailValidation, CompareFieldsValidation, RequeridFieldValidation, ValidationComposite } from '../../../../../validation/validators'
+import { EmailValidation, CompareFieldsValidation, RequiredFieldValidation, ValidationComposite } from '../../../../../validation/validators'
 import { Validation } from '../../../../../presentation/protocols/validation'
 import { EmailValidator } from '../../../../../validation/protocols/email-validator'
 import { makeSignUpValidation } from './signup-validation-factory'
@@ -19,7 +19,7 @@ describe('SignUpValidation Factory', () => {
     makeSignUpValidation()
     const validations: Validation[] = []
     for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
-      validations.push(new RequeridFieldValidation(field))
+      validations.push(new RequiredFieldValidation(field))
     }
     validations.push(new CompareFieldsValidation('password', 'passwordConfirmation'))
     validations.push(new EmailValidation('email', makeEmailValidator()))
