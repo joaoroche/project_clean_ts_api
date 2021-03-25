@@ -21,12 +21,13 @@ const makeAccessToken = async (): Promise<string> => {
     _id: id
   }, {
     $set: {
-      accessToken: accessToken
+      accessToken
     }
   })
   return accessToken
 }
-describe('Login Routes', () => {
+
+describe('Survey Routes', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -39,7 +40,7 @@ describe('Login Routes', () => {
     surveyCollection = await MongoHelper.getCollection('surveys')
     await surveyCollection.deleteMany({})
     accountCollection = await MongoHelper.getCollection('accounts')
-    await surveyCollection.deleteMany({})
+    await accountCollection.deleteMany({})
   })
 
   describe('POST /surveys', () => {
@@ -83,20 +84,12 @@ describe('Login Routes', () => {
         .expect(403)
     })
 
-    test('Should return 200 on load surveys with valid accessToken', async () => {
-      await surveyCollection.insertMany([{
-        question: 'any_question',
-        answers: [{
-          answer: 'any_answer',
-          image: 'any_image'
-        }],
-        date: new Date()
-      }])
+    test('Should return 204 on load surveys with valid accessToken', async () => {
       const accessToken = await makeAccessToken()
       await request(app)
         .get('/api/surveys')
         .set('x-access-token', accessToken)
-        .expect(200)
+        .expect(204)
     })
   })
 })

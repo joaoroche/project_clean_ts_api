@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/method-signature-style */
 import { SurveyAnswerModel } from '../models/survey'
 
 export interface AddSurveyModel {
@@ -7,6 +8,5 @@ export interface AddSurveyModel {
 }
 
 export interface AddSurvey {
-  // eslint-disable-next-line @typescript-eslint/method-signature-style
-  add (surveyData: AddSurveyModel): Promise<void>
+  add (data: AddSurveyModel): Promise<void>
 }

@@ -5,6 +5,7 @@ import { Collection } from 'mongodb'
 import { hash } from 'bcrypt'
 
 let accountCollection: Collection
+
 describe('Login Routes', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
@@ -19,7 +20,7 @@ describe('Login Routes', () => {
     await accountCollection.deleteMany({})
   })
 
-  describe('POST /signup Routes', () => {
+  describe('POST /signup', () => {
     test('Should return 200 on signup', async () => {
       await request(app)
         .post('/api/signup')
@@ -30,10 +31,19 @@ describe('Login Routes', () => {
           passwordConfirmation: '123'
         })
         .expect(200)
+      await request(app)
+        .post('/api/signup')
+        .send({
+          name: 'Joao Carlos',
+          email: 'joaocarlos.roche@globo.com',
+          password: '123',
+          passwordConfirmation: '123'
+        })
+        .expect(403)
     })
   })
 
-  describe('POST /login Routes', () => {
+  describe('POST /login', () => {
     test('Should return 200 on login', async () => {
       const password = await hash('123', 12)
       await accountCollection.insertOne({

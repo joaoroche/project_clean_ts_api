@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/quotes */
 export class EmailInUseError extends Error {
   constructor () {
-    super(`The received email is already in use`)
+    super('The received email is already in use')
     this.name = 'EmailInUseError'
   }
 }

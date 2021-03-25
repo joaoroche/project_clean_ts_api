@@ -4,12 +4,13 @@ import { InvalidParamError } from '../../presentation/errors'
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
-    isValid (_email: string): boolean {
+    isValid (email: string): boolean {
       return true
     }
   }
   return new EmailValidatorStub()
 }
+
 interface SutTypes {
   sut: EmailValidation
   emailValidatorStub: EmailValidator

@@ -1,4 +1,4 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
-export interface UpdatedAccessTokenRepository {
+export interface UpdateAccessTokenRepository {
   updateAccessToken (id: string, token: string): Promise<void>
 }
