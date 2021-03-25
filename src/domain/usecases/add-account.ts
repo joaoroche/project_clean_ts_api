@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
-import { AccountModel } from '../models/account'
+import { AccountModel } from '@/domain/models/account'
 
 export interface AddAccountModel {
   name: string
