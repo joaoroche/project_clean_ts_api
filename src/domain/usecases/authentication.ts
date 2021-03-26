@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
-export interface AuthenticationModel {
+export type AuthenticationModel = {
   email: string
   password: string
 }
