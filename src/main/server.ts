@@ -1,5 +1,6 @@
-import { MongoHelper } from '../infra/db/mongodb/helpers/mongo-helper'
+import 'reflect-metadata'
 import env from './config/env'
+import { MongoHelper } from '../infra/db/mongodb/helpers/mongo-helper'
 
 MongoHelper.connect(env.mongoUrl)
   .then(async () => {
