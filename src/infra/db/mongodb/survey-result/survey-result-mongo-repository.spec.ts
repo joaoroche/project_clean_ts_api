@@ -17,13 +17,15 @@ const makeSurvey = async (): Promise<SurveyModel> => {
     question: 'any_question',
     answers: [{
       image: 'any_image',
-      answer: 'any_answer'
+      answer: 'any_answer_1'
     }, {
-      answer: 'other_answer'
+      answer: 'any_answer_2'
+    }, {
+      answer: 'any_answer_3'
     }],
     date: new Date()
   })
-  return res.ops[0]
+  return MongoHelper.map(res.ops[0])
 }
 
 const makeAccount = async (): Promise<AccountModel> => {
@@ -32,7 +34,7 @@ const makeAccount = async (): Promise<AccountModel> => {
     email: 'any_email@mail.com',
     password: 'any_password'
   })
-  return res.ops[0]
+  return MongoHelper.map(res.ops[0])
 }
 
 describe('Survey Mongo Repository', () => {
@@ -47,11 +49,10 @@ describe('Survey Mongo Repository', () => {
   beforeEach(async () => {
     surveyCollection = await MongoHelper.getCollection('surveys')
     await surveyCollection.deleteMany({})
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    surveyResultCollection = await MongoHelper.getCollection('surveyResult')
-    await surveyCollection.deleteMany({})
+    surveyResultCollection = await MongoHelper.getCollection('surveyResults')
+    await surveyResultCollection.deleteMany({})
     accountCollection = await MongoHelper.getCollection('accounts')
-    await surveyCollection.deleteMany({})
+    await accountCollection.deleteMany({})
   })
 
   describe('save()', () => {
@@ -68,6 +69,27 @@ describe('Survey Mongo Repository', () => {
       expect(surveyResult).toBeTruthy()
       expect(surveyResult.id).toBeTruthy()
       expect(surveyResult.answer).toBe(survey.answers[0].answer)
+    })
+
+    test('Should add a survey result if its not new', async () => {
+      const survey = await makeSurvey()
+      const account = await makeAccount()
+      const res = await surveyResultCollection.insertOne({
+        surveyId: survey.id,
+        accountId: account.id,
+        answer: survey.answers[0].answer,
+        date: new Date()
+      })
+      const sut = makeSut()
+      const surveyResult = await sut.save({
+        surveyId: survey.id,
+        accountId: account.id,
+        answer: survey.answers[1].answer,
+        date: new Date()
+      })
+      expect(surveyResult).toBeTruthy()
+      expect(surveyResult.id).toEqual(res.ops[0]._id)
+      expect(surveyResult.answer).toBe(survey.answers[1].answer)
     })
   })
 })
