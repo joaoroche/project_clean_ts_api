@@ -1,4 +1,4 @@
-import { SurveyResultModel } from '../models/survey-result'
+import { SurveyResultModel } from '@/domain/models/survey-result'
 
 /* eslint-disable @typescript-eslint/method-signature-style */
 export interface SaveSurveyResultModel {
