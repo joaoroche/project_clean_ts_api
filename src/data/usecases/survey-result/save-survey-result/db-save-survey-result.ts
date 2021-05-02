@@ -3,7 +3,7 @@ import { SaveSurveyResultRepository, SurveyResultModel, SaveSurveyResult, SaveSu
 export class DbSaveSurveyResult implements SaveSurveyResult {
   constructor (private readonly saveSurveyResultRepository: SaveSurveyResultRepository) {}
 
-  async add (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
+  async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
     const surveyResult = await this.saveSurveyResultRepository.save(data)
     return surveyResult
   }
