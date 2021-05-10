@@ -1,7 +1,7 @@
 import { SurveyResultModel } from '@/domain/models/survey-result'
 
 /* eslint-disable @typescript-eslint/method-signature-style */
-export interface SaveSurveyResultModel {
+export interface SaveSurveyResultParams {
   surveyId: string
   accountId: string
   answer: string
@@ -9,5 +9,5 @@ export interface SaveSurveyResultModel {
 }
 
 export interface SaveSurveyResult {
-  save (data: SaveSurveyResultModel): Promise<SurveyResultModel>
+  save (data: SaveSurveyResultParams): Promise<SurveyResultModel>
 }

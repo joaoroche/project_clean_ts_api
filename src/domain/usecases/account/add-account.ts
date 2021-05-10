@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
 import { AccountModel } from '@/domain/models/account'
 
-export interface AddAccountModel {
+export interface AddAccountParams {
   name: string
   email: string
   password: string
 }
 
 export interface AddAccount {
-  add (account: AddAccountModel): Promise<AccountModel>
+  add (account: AddAccountParams): Promise<AccountModel>
 }
