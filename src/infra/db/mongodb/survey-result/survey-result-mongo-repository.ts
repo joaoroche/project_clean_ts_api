@@ -4,9 +4,9 @@ import { SaveSurveyResultParams, SaveSurveyResultRepository, SurveyResultModel }
 import { ObjectId } from 'bson'
 
 export class SurveyResultMongoRepository implements SaveSurveyResultRepository, LoadSurveyResultRepository {
-  async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
+  async save (data: SaveSurveyResultParams): Promise<void> {
     const surveyResultCollection = await MongoHelper.getCollection('surveyResults')
-    const res = await surveyResultCollection.findOneAndUpdate({
+    await surveyResultCollection.findOneAndUpdate({
       surveyId: new ObjectId(data.surveyId),
       accountId: new ObjectId(data.accountId)
     }, {
@@ -18,7 +18,6 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository, 
       upsert: true,
       returnOriginal: false
     })
-    return res.value && MongoHelper.map(res.value)
   }
 
   async loadBySurveyId (surveyId: string): Promise<SurveyResultModel> {
