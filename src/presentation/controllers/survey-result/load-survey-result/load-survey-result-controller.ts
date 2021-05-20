@@ -1,5 +1,4 @@
 import { Controller, HttpRequest, HttpResponse, LoadSurveyById } from './load-survey-result-protocols'
-
 export class LoadSurveyResultController implements Controller {
   constructor (private readonly loadSurveyById: LoadSurveyById) {}
 
