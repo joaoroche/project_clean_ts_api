@@ -1,3 +1,5 @@
+import { AuthenticationModel } from '@/domain/models/authentication'
+
 /* eslint-disable @typescript-eslint/method-signature-style */
 export interface AuthenticationParams {
   email: string
@@ -5,5 +7,5 @@ export interface AuthenticationParams {
 }
 
 export interface Authentication {
-  auth (authentication: AuthenticationParams): Promise<string>
+  auth (authentication: AuthenticationParams): Promise<AuthenticationModel>
 }
