@@ -1,7 +1,9 @@
-import { MongoHelper, QueryBuilder } from '../helpers/'
+import { MongoHelper, QueryBuilder } from '../helpers'
+import { SaveSurveyResultRepository } from '@/data/protocols/db/survey-result/save-survey-result-repository'
 import { LoadSurveyResultRepository } from '@/data/protocols/db/survey-result/load-survey-result-repository'
-import { SaveSurveyResultParams, SaveSurveyResultRepository, SurveyResultModel } from '@/data/usecases/survey-result/save-survey-result/db-save-survey-result-protocols'
-import { ObjectId } from 'bson'
+import { SurveyResultModel } from '@/domain/models/survey-result'
+import { SaveSurveyResultParams } from '@/domain/usecases/survey-result/save-survey-result'
+import { ObjectId } from 'mongodb'
 
 export class SurveyResultMongoRepository implements SaveSurveyResultRepository, LoadSurveyResultRepository {
   async save (data: SaveSurveyResultParams): Promise<void> {
@@ -15,8 +17,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository, 
         date: data.date
       }
     }, {
-      upsert: true,
-      returnOriginal: false
+      upsert: true
     })
   }
 

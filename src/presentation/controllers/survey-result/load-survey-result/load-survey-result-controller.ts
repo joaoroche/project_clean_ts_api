@@ -1,11 +1,12 @@
-import { LoadSurveyResult } from '@/domain/usecases/survey-result/load-survey-result'
+import { Controller, HttpRequest, HttpResponse, LoadSurveyById, LoadSurveyResult } from './load-survey-result-protocols'
+import { forbidden, serverError, ok } from '@/presentation/helpers/http/http-helper'
 import { InvalidParamError } from '@/presentation/errors'
-import { forbidden, ok, serverError } from '@/presentation/helpers/http/http-helper'
-import { Controller, HttpRequest, HttpResponse, LoadSurveyById } from './load-survey-result-protocols'
+
 export class LoadSurveyResultController implements Controller {
   constructor (
     private readonly loadSurveyById: LoadSurveyById,
-    private readonly loadSurveyResult: LoadSurveyResult) {}
+    private readonly loadSurveyResult: LoadSurveyResult
+  ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
